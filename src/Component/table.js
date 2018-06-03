@@ -6,6 +6,7 @@ class Table extends React.Component {
         return (
             <div>
                 <p>Table Working!</p>
+                { this.props.currencies}
             </div>
         );
     }
