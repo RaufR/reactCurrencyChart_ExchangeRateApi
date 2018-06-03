@@ -21,7 +21,7 @@ class Main extends React.Component {
             .catch(err => console.log(err));
     }
 
-     //Dropdown 
+     //Dropdown
      DropDown = function(list){
         return <option>{list}</option>
     };

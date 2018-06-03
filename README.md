@@ -19,3 +19,6 @@ API NOTE:
 
 *Similiar to fixer.io but lack of certain functionality but provide open access without API_KEY.
 
+
+*Lack of API functionality we can not use timestapm data for last 30 days. Only fixer.io with their paid service
+provide timestamp data.
