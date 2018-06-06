@@ -1,4 +1,5 @@
 import React from 'react';
+import Main from './main';
 
 
 class Table extends React.Component {
@@ -6,7 +7,7 @@ class Table extends React.Component {
         return (
             <div>
                 <p>Table Working!</p>
-                { this.props.currencies}
+
             </div>
         );
     }
