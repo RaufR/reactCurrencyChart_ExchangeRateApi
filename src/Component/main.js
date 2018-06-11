@@ -1,5 +1,8 @@
 import React from 'react';
 import '../App.css';
+import  Table from './table/table'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class Main extends React.Component {
     constructor(props){
@@ -11,15 +14,13 @@ class Main extends React.Component {
             input: '?',
             rate :0,
             Date: '',
-            tableOutput: []
-
+            tableOutput: [],
+            finalData: []
         };
         this.getRates = this.getRates.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handlePrint = this.handlePrint.bind(this);
-
     }
-
     componentDidMount() {
         fetch('https://exchangeratesapi.io/api/latest?symbols=USD,GBP,AUD,JPY')
             .then(data => data.json())
@@ -34,7 +35,6 @@ class Main extends React.Component {
             })
             .catch(err => console.log(err));
     }
-
     getRates(){
         const base = this.handlePrint();
         fetch(`https://exchangeratesapi.io/api/latest?base=${base}`)
@@ -43,9 +43,7 @@ class Main extends React.Component {
                 const outputCurrency = [];
                 outputCurrency.push( ...Object.entries(data.rates).map(rates => rates));
                this.setState({
-                   rate: data.rates,
-                   date: data.date,
-                   base:data.base
+                   rate: data.rates
                })
                     var currencyListed = ["USD","JPY","EUR","GBP","CAD","AUD"];
                     var tableOutput =[];
@@ -53,15 +51,22 @@ class Main extends React.Component {
                         if(currencyListed.includes(outputCurrency[i][0])){
                             tableOutput.push(outputCurrency[i]);
                         }
-                        this.setState({tableOutput})
+                        const finalData = tableOutput.map(function (i) {
+                            return{
+                                "id": i[0],
+                                "rate": i[1]
+                            }
+                        })
+
+                        this.setState({finalData});
+                        console.log(finalData);
                     }
-                    console.log(tableOutput);
+
+
 
             })
             .catch(err => console.log(err))
-
     }
-
      //Dropdown
      DropDown = function(list){
         return <option value={list}>{list}</option>
@@ -79,7 +84,7 @@ class Main extends React.Component {
     }
     render() {
         const {currencies} = this.state;
-        const {tableOutput} = this.state;
+        const {finalData} = this.state;
         return (
             <div>
                 <span>SELECT your Base: </span>
@@ -88,17 +93,15 @@ class Main extends React.Component {
                     onChange={this.handleChange}>
                     <option inputcurrency={currencies} selected data-default>SELECT BASE</option>{currencies.map(this.DropDown)}
                 </select>
-                <button onClick={this.getRates}>GET Rates</button>
+                <button className="btn btn-primary" onClick={this.getRates}>GET Rates</button>
                 <p>selected base:{this.handlePrint()} </p>
-                <p>{tableOutput}</p>
-
+                <Table finalData={finalData}/>
             </div>
+
+
+
         );
     }
 }
-
-
-
-
 
 export  default Main;

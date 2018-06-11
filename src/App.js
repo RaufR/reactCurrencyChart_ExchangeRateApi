@@ -1,6 +1,6 @@
 import React from 'react';
 import Main from './Component/main';
-import Table from './Component/table';
+import Table from './Component/table/table';
 
 class App extends React.Component {
 
@@ -9,7 +9,6 @@ class App extends React.Component {
             <div>
                 <h1>App!</h1>
                 <Main />
-                <Table />
             </div>
 
         );
