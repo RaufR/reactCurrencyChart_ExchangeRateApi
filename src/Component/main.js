@@ -22,7 +22,7 @@ class Main extends React.Component {
         this.handlePrint = this.handlePrint.bind(this);
     }
     componentDidMount() {
-        fetch('https://exchangeratesapi.io/api/latest?symbols=USD,GBP,AUD,JPY')
+        fetch('https://exchangeratesapi.io/api/latest?symbols=USD,GBP,AUD,JPY,CZK')
             .then(data => data.json())
             .then(data => {
                 const currencies = [];
@@ -36,6 +36,7 @@ class Main extends React.Component {
             .catch(err => console.log(err));
     }
 
+    //branch testin comment
     //second api call on base currency
     getRates(){
         const base = this.handlePrint();
@@ -51,7 +52,7 @@ class Main extends React.Component {
                    Date
 
                })
-                    var currencyListed = ["USD","JPY","EUR","GBP","CAD","AUD"];
+                    var currencyListed = ["USD","JPY","EUR","GBP","CAD","AUD","CZK"];
                     var tableOutput =[];
                     for (var i=0; i<outputCurrency.length; i++){
                         if(currencyListed.includes(outputCurrency[i][0])){
