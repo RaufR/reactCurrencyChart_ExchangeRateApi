@@ -17,10 +17,17 @@ class Table extends React.Component {
     }
     render(){
         return (
-            <BootstrapTable data={this.props.finalData} striped hover>
-                <TableHeaderColumn isKey dataField='id'>Name</TableHeaderColumn>
-                <TableHeaderColumn  dataField='rate'>Rates</TableHeaderColumn>
+            <div className="col-md-8 margin4">
+            <BootstrapTable
+                data={this.props.finalData}
+                            height='auto'
+                            hover
+                            headerStyle={ { background: '#6F8BA9' } }>
+                <TableHeaderColumn ClassName="col-md-4" isKey dataField='id'>Name</TableHeaderColumn>
+                <TableHeaderColumn ClassName="col-md-4"  dataField='rate'>Rates</TableHeaderColumn>
             </BootstrapTable>
+                <h5 className="margin1">Contact: https://www.linkedin.com/in/raufur-rahmancz/</h5>
+            </div>
 
 
         );

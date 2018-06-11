@@ -10,7 +10,7 @@ class Main extends React.Component {
         this.state ={
             currencies: [],
             value: '?',
-            base: '?',
+            base: '-',
             input: '?',
             rate :0,
             Date: '',
@@ -35,15 +35,21 @@ class Main extends React.Component {
             })
             .catch(err => console.log(err));
     }
+
+    //second api call on base currency
     getRates(){
         const base = this.handlePrint();
         fetch(`https://exchangeratesapi.io/api/latest?base=${base}`)
             .then(data => data.json())
             .then(data =>{
                 const outputCurrency = [];
+                const Date =[];
+                Date.push(data.date)
                 outputCurrency.push( ...Object.entries(data.rates).map(rates => rates));
                this.setState({
-                   rate: data.rates
+                   rate: data.rates,
+                   Date
+
                })
                     var currencyListed = ["USD","JPY","EUR","GBP","CAD","AUD"];
                     var tableOutput =[];
@@ -57,19 +63,15 @@ class Main extends React.Component {
                                 "rate": i[1]
                             }
                         })
-
                         this.setState({finalData});
                         console.log(finalData);
                     }
-
-
-
             })
             .catch(err => console.log(err))
     }
      //Dropdown
      DropDown = function(list){
-        return <option value={list}>{list}</option>
+         return <option  value={list}>{list}</option>
     };
 
     handleChange(e) {
@@ -85,17 +87,22 @@ class Main extends React.Component {
     render() {
         const {currencies} = this.state;
         const {finalData} = this.state;
+        const {Date} = this.state;
         return (
-            <div>
-                <span>SELECT your Base: </span>
+            <div >
+                <h4 className="margin2 col-md-12 text-center" ><b>Select your Base Currency: </b></h4>
                 <select
+                    className="col-md-4 margin4  dropdown-header1"
                     autoFocus
                     onChange={this.handleChange}>
                     <option inputcurrency={currencies} selected data-default>SELECT BASE</option>{currencies.map(this.DropDown)}
                 </select>
-                <button className="btn btn-primary" onClick={this.getRates}>GET Rates</button>
-                <p>selected base:{this.handlePrint()} </p>
+                <button className="btn btn-primary margin3 col-md-4" onClick={this.getRates}>GET Rates</button>
+
+                <p className="margin4 col-md-4" ><b>Selected Base: </b>{this.handlePrint()} </p>
+                <p className="col-md-4 margin4"> <b>Date: </b> {Date}</p>
                 <Table finalData={finalData}/>
+
             </div>
 
 
