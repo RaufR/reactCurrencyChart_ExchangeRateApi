@@ -2,7 +2,7 @@
   "name": "currency2",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://RaufR.github.io/reactCurrencyChart_ExchangeRateApi/",
+  "homepage": "https://raufr.github.io/reactCurrencyChart_ExchangeRateApi/",
   "dependencies": {
     "bootstrap": "^4.1.1",
     "gh-pages": "^1.2.0",
